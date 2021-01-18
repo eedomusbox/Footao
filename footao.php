@@ -6,29 +6,19 @@
  *
  * Versionning
  *  V1.0: Version initiale
- *  V1.1: Ajout icône dans le mail
- *  V1.2: Paramètre pour contab
- *  V1.3: Suppression de -19, FEM, etc...
-
  *
  * Utilisation
- *  http://192.168.0.12/scripts/footao.php
- *  http://192.168.0.12/scripts/footao.php?ville=Marseille_Barcelone
+ *  footao.php
+ *  footao.php?ville=Marseille_Barcelone
  *  Pour changer de jour, il faut mettre le paramètre jour avec le nombre de jour en plus
  *  par rapport à aujourd'hui: &jour=4
+ *  Pour changer de recherche, il faut utiliser le paramète ville avec les villes que l'on
+ *  recherche séparé par un "_" : Exemple : ville=Toulouse_Milan
  * *********************************************************************************** */
 
 // Chargement des données et fonctions
-chdir ( __DIR__ );
-require_once ('../model/_include/sdk_all.php');
 require_once ('../model/_include/simple_html_dom.php');
 require_once '../model/_3rdParty/PHPmailer/PHPMailerAutoload.php';
-require_once '../template/header4script.php';
-
-// Titre du script
-$printS = fct_get_title ( __FILE__ );
-$printS .= fct_how_to_used ( format_url_return ( "http://" . $_SERVER['SERVER_ADDR'] . $_SERVER['SCRIPT_NAME'] . '?ville=Marseille_Barcelone' ), 'X', '' );
-$printS .= fct_how_to_used ( format_url_return ( "http://" . $_SERVER['SERVER_ADDR'] . $_SERVER['SCRIPT_NAME'] . '?jour=1234567' ), '', '' );
 
 // Variable
 $bodyMail = '';
@@ -174,7 +164,6 @@ foreach ( $lien as $link ) {
 $printS .= $bodyMail;
 $printS = str_replace ( "navy", "white", $printS );
 print_r ( $printS );
-
 
 if ( $bodyMail != '' ) {
 // Récupération du destinataire du mail
